@@ -1,6 +1,6 @@
-# Project Name
+# Project Name: City Explorer
 
-**Author**: City Explorer
+**Author**: Gina
 **Version**: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)
 
 ## Overview
