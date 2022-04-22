@@ -1,25 +1,46 @@
-import logo from './logo.svg';
 import './App.css';
+import React from "react"; //Import the React Component
+import Button from 'react-bootstrap/Button';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+//Create an app component 
+class App extends React.Component {
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     faves: 0,
+  //   };
+  // }
+
+
+  // favored = (beast) => {
+  //   this.setState({
+  //     faves: this.state.faves + 1,
+
+  //   });
+  //   //Call the modal function
+  //   this.props.modalBeast(beast);
+  //   this.props.showModal();
+  // }
+  //**********************************//
+
+  //Rerun JSX 
+  render(title) {
+
+
+
+    //Wrap JSX in empty tags (fragments)
+    return (<>
+      <article>
+        Article
+      </article>
+    </>)
+
+  }
+
 }
 
+
+
+//Make the app component to make it available for to other components
 export default App;
