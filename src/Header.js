@@ -1,5 +1,4 @@
 import React from "react"; //Import the React Component
-import Popover from 'react-bootstrap/Popover'
 import './App.css' //Link CSS file
 
 //Create an app compnent from react's original component. Similar to how classes work
