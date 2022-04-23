@@ -10,7 +10,11 @@ A React application that uses the Axios library to make user-initiated requests 
 <!-- What are the steps that a user must take in order to build this app on their own machine and get it running? -->
 
 ## Architecture
+
+
 View this diagram to see how data will flow for this project:
+
+### Web request-response cycle for lab 06
 ![Data-Flow](./imgs/301%20Class%20React%20Lucidchart%202022-04-18%2016-07-43.png)
 
 
@@ -21,4 +25,16 @@ View this diagram to see how data will flow for this project:
 
 ## Credit and Collaborations
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
-Collaborated on the Dataflow: [Chad](https://github.com/thryce86)
+* Collaborated on the Web request-response cycle for lab 06 with [Chad](https://github.com/thryce86)
+
+## Feature List
+
+Name of feature: Build a React application that uses the Axios library to make user-initiated requests for data from a third-party API.
+
+Estimate of time needed to complete: _5_
+
+Start time: _1:00am_
+
+Finish time: _____
+
+Actual time needed to complete: _____

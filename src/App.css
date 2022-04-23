@@ -36,3 +36,26 @@
     transform: rotate(360deg);
   }
 }
+body{
+  color:white
+}
+#submitButton, .mb-3{
+  display: inline;
+  margin: 10px;
+}
+
+#submitButton{
+  display: inline;
+  border-radius: 8px;
+  padding:5px;
+}
+
+
+footer{
+  text-align: center;
+  color: gray;
+}
+
+#card{
+  margin: 10px;
+}
