@@ -7,15 +7,28 @@
 A React application that uses the Axios library to make user-initiated requests for data based on a specific location.
 
 ## Getting Started
-<!-- What are the steps that a user must take in order to build this app on their own machine and get it running? -->
+What you'll need:
+* Your api keys
+* A code editor (such as VS Code)
+* Node, NPM, NVM, React & Axios installed
+* Web Browser (recommend Google Chrome)
 
 ## Architecture
 
+The following diagram(s) depict how data will flow for this project:
 
-View this diagram to see how data will flow for this project:
+### Updated Web request-response cycle for lab 07
+![Lab07](./imgs/Lab07.png)
 
-### Web request-response cycle for lab 06
-![Data-Flow](./imgs/301%20Class%20React%20Lucidchart%202022-04-18%2016-07-43.png)
+### Updated Web request-response cycle for lab 08
+![Lab08](./imgs/Lab08.png)
+
+## Updated Web request-response cycle for lab 09
+![Lab09](./imgs/Lab09.png)
+
+### Updated Web request-response cycle for lab 10
+![Lab10](./imgs/Lab10.png)
+
 
 
 ## Change Log
@@ -27,14 +40,27 @@ View this diagram to see how data will flow for this project:
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
 * Collaborated on the Web request-response cycle for lab 06 with [Chad](https://github.com/thryce86)
 
+* Collaborated on the Web request-response cycle for lab 07 with [Chad](https://github.com/thryce86)
+
+* Collaborated on the Web request-response cycle for lab 08 with D. Owens & [J. Rumsey](https://github.com/nojronatron)
+
+* Collaborated on the Web request-response cycle for lab 09 with A. Hill
+
 ## Feature List
 
-Name of feature: Build a React application that uses the Axios library to make user-initiated requests for data from a third-party API.
+### Feature 1
+Build a React application that uses the Axios library to make user-initiated requests for data from a third-party API.
 
-Estimate of time needed to complete: _5_
+Estimate of time needed to complete: 5
+Start time: 1:00am
+Finish time: 11:00am (Next Day)
+Actual time needed to complete: 5
 
-Start time: _1:00am_
+### Feature 2
+Build a React application that uses the Axios library to make user-initiated requests for data from a third-party API.
 
-Finish time: _____
+Estimate of time needed to complete: 4
+Start time: 11:50am
+Finish time: 
+Actual time needed to complete: 
 
-Actual time needed to complete: _____
