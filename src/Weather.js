@@ -1,7 +1,5 @@
 import React from "react"; //Import the React Component
-import Popover from 'react-bootstrap/Popover'
 import './App.css' //Link CSS file
-import App from './App'
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
