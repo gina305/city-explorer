@@ -10,9 +10,9 @@ class Header extends React.Component {
   render() {
     return(
      
-       <head>
+       <div>
          <title>Location Data Finder</title>
-       </head>
+       </div>
     
     )
   }

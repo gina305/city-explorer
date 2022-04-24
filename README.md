@@ -21,9 +21,9 @@ The following diagram(s) depict how data will flow for this project:
 ![Lab07](./imgs/Lab07.png)
 
 ### Updated Web request-response cycle for lab 08
-![Lab08](./imgs/Lab08.png)
+![Lab08](./imgs/Lab08.jgg)
 
-## Updated Web request-response cycle for lab 09
+### Updated Web request-response cycle for lab 09
 ![Lab09](./imgs/Lab09.png)
 
 ### Updated Web request-response cycle for lab 10
@@ -38,13 +38,13 @@ The following diagram(s) depict how data will flow for this project:
 
 ## Credit and Collaborations
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
-* Collaborated on the Web request-response cycle for lab 06 with [Chad](https://github.com/thryce86)
-
 * Collaborated on the Web request-response cycle for lab 07 with [Chad](https://github.com/thryce86)
 
-* Collaborated on the Web request-response cycle for lab 08 with D. Owens & [J. Rumsey](https://github.com/nojronatron)
+* Collaborated on the Web request-response cycle for lab 08 with [Chad](https://github.com/thryce86)
 
-* Collaborated on the Web request-response cycle for lab 09 with A. Hill
+* Collaborated on the Web request-response cycle for lab 09 with D. Owens & [J. Rumsey](https://github.com/nojronatron)
+
+* Collaborated on the Web request-response cycle for lab 10 with A. Hill
 
 ## Feature List
 

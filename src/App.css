@@ -59,3 +59,8 @@ footer{
 #card{
   margin: 10px;
 }
+
+img{
+  height: 500px;
+  width: 500px;
+}
