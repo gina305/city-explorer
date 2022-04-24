@@ -1,6 +1,5 @@
 import './App.css';
 import React from "react"; //Import the React Component
-
 import Header from "./Header";
 import axios from 'axios';
 import Footer from './Footer';
@@ -36,7 +35,7 @@ class App extends React.Component {
 
     //clear error
     this.setState({
-      error:''
+      error: ''
     });
 
     //save the input city to a variable
@@ -45,19 +44,14 @@ class App extends React.Component {
     let apiUrl = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&city=${userCity}&format=json`
 
 
-let cityData = await axios.get(apiUrl);
-    
+    let cityData = await axios.get(apiUrl);
+
     //Try getting lat,long values
     try {
       //send an api request for data on the using my secret credentials
-      
 
       //let's see. 
       // console.log(cityData.data[0].lat);
-      // const lat = cityData.data[0].lat;
-      // const lon = cityData.data[0].lon;
-
-
       //set the city and it's retruned data in state
 
       this.setState((state, props) => ({
@@ -67,6 +61,7 @@ let cityData = await axios.get(apiUrl);
         latLonText: 'Location: ',
         lat: cityData.data[0].lat,
         lon: cityData.data[0].lon,
+        weatherResponse: {},
 
       }));
       // console.log(this.state); State won't update here
@@ -75,38 +70,54 @@ let cityData = await axios.get(apiUrl);
       alert(error)
       //set state
       this.setState({
-        error:error.toString()
+        error: error.toString()
       });
     }
 
     //Try getting map using lat,lon values
     try {
       //send an api request for data on the using my secret credentials
-      let mapUrl= `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&center=${cityData.data[0].lat},${cityData.data[0].lon}&zoom=9&format=jpg`
+      let mapUrl = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&center=${cityData.data[0].lat},${cityData.data[0].lon}&zoom=9&format=jpg`
 
       let cityMap = await axios.get(mapUrl);
 
       //let's see the map result
       console.log(cityMap.request.responseURL);
-      
+
       this.setState({
-    map: cityMap.request.responseURL
-  });
+        map: cityMap.request.responseURL
+      });
     } catch (error) {
 
       alert(error)
       this.setState({
-        error:'Unmapped location:' + error.toString() + "-Enter a new city"
+        error: 'Unmapped location:' + error.toString() + "-Enter a new city"
       });
 
     }
-this.showMap();
+    //Show results on a map
+    this.showMap();
+
+    //get weather data for the city
+    this.findWeather();
+
+  }
+
+  //Request data from my custom weather server endpoint
+  findWeather = async () => {
+    let weatherURL = `https://city-explorer-cf301-gina.herokuapp.com/weather?city=${this.state.city}`
+
+    let weather = await axios.get(weatherURL);
     
+
+    this.setState({
+      weatherResponse: weather.data
+    }, ()=> console.log(this.state.weatherResponse));
     
   }
-  
+
   showMap = async (event) => {
-console.log(this.state)
+    console.log(this.state)
   }
   render() {
 
@@ -114,21 +125,13 @@ console.log(this.state)
     return (
       <>
         <Header />
-        {/* <input onChange={(e) => this.setState({ searchQuery: e.target.value })} placeholder="search for a city"></input>
-        <button onClick={this.getLocation}>Locate!</button>
-        {this.state.location.place_id && 
-          <h2>The city is: {this.state.location.display_name}</h2>
-        } */}
-
-        <Weather city={this.state.city} display_name={this.state.display_name} locationData={this.state.locationData} findCity={this.findCity} map={this.state.map} latLonText={this.state.latLonText}/>
+        <Weather city={this.state.city} display_name={this.state.display_name} locationData={this.state.locationData} findCity={this.findCity} map={this.state.map} latLonText={this.state.latLonText} />
         <Alert variant="success">
           <Alert.Heading>{this.state.error}</Alert.Heading>
           <hr />
-          <p className="mb-0">
-            
-          </p>
+          <p className="mb-0"></p>
         </Alert>
-        <Footer/>
+        <Footer />
 
       </>
     )
