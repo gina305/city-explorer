@@ -1,6 +1,6 @@
 import './App.css';
 import React from "react"; //Import the React Component
-
+import Button from 'react-bootstrap/Button';
 import Header from "./Header";
 import axios from 'axios';
 import Footer from './Footer';
@@ -22,8 +22,9 @@ class App extends React.Component {
       latLonText: '',
       lat: '',
       lon: '',
-      error1: '',
-      map: ''
+      error: '',
+      map: '',
+      showAlert: false,
     }
   }
   //asynchronous function for getting city data using the axios module
@@ -58,26 +59,28 @@ let cityData = await axios.get(apiUrl);
       // const lon = cityData.data[0].lon;
 
 
-      //set the city and it's retruned data in state
+      //set the city and it's returned data in state
 
       this.setState((state, props) => ({
         city: userCity,
         locationData: cityData.data[0],
         display_name: 'City: ' + cityData.data[0].display_name,
-        latLonText: 'Location: ',
         lat: cityData.data[0].lat,
         lon: cityData.data[0].lon,
-
+        latLonText: 'Location: ',
+        showAlert:false
       }));
       // console.log(this.state); State won't update here
 
     } catch (error) {
-      alert(error)
+      //alert(error)
       //set state
       this.setState({
-        error:error.toString()
+        error:error.toString() + userCity,
+        showAlert: true
       });
     }
+    console.log(this.state.error)
 
     //Try getting map using lat,lon values
     try {
@@ -94,39 +97,39 @@ let cityData = await axios.get(apiUrl);
   });
     } catch (error) {
 
-      alert(error)
+      alert(error);
       this.setState({
-        error:'Unmapped location:' + error.toString() + "-Enter a new city"
+        error:'Unmapped location:' + error.toString() + "-Enter a valid city.",
+        showAlert: true
+
       });
 
     }
 this.showMap();
-    
     
   }
   
   showMap = async (event) => {
 console.log(this.state)
   }
-  render() {
 
+//Alert user if there is an error
+closeAlert = (event) => {
+console.log(event.target.value)
+}
+  
+  render() {
     //Render data for return
     return (
       <>
         <Header />
-        {/* <input onChange={(e) => this.setState({ searchQuery: e.target.value })} placeholder="search for a city"></input>
-        <button onClick={this.getLocation}>Locate!</button>
-        {this.state.location.place_id && 
-          <h2>The city is: {this.state.location.display_name}</h2>
-        } */}
-
         <Weather city={this.state.city} display_name={this.state.display_name} locationData={this.state.locationData} findCity={this.findCity} map={this.state.map} latLonText={this.state.latLonText}/>
-        <Alert variant="success">
+        <Alert variant="success" show={this.state.showAlert}>
           <Alert.Heading>{this.state.error}</Alert.Heading>
           <hr />
           <p className="mb-0">
-            
           </p>
+          <Button onClick={this.closeAlert}>Show Alert</Button>
         </Alert>
         <Footer/>
 
