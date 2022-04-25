@@ -9,7 +9,10 @@ class Header extends React.Component {
   //Retrun JSX - which allows us to use javascript to render html
   render() {
     return(
+     
+       <div>
          <title>Location Data Finder</title>
+       </div>
     
     )
   }
