@@ -1,3 +1,5 @@
+//Makes sure you have this for component styling!
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import React from "react"; //Import the React Component
 import Button from 'react-bootstrap/Button';
@@ -6,6 +8,9 @@ import axios from 'axios';
 import Footer from './Footer';
 import Weather from './Weather'
 import Modal from 'react-bootstrap/Modal';
+import Map from './Map'
+import Form from 'react-bootstrap/Form';
+
 //Create an app component 
 class App extends React.Component {
 
@@ -26,6 +31,8 @@ class App extends React.Component {
       errorMsg: '',
       map: '',
       showModal: false,
+      weatherResponse:[],
+      forecast:[]
     }
   }
   //asynchronous function for getting city data using the axios module
@@ -53,9 +60,9 @@ class App extends React.Component {
     event.preventDefault();
 
     //clear error
-    this.setState({
-      error: ''
-    });
+    // this.setState({
+    //   error: ''
+    // });
 
     //save the input city to a variable
     let userCity = event.target[0].value;
@@ -82,37 +89,40 @@ class App extends React.Component {
         display_name: 'City: ' + cityData.data[0].display_name,
         lat: cityData.data[0].lat,
         lon: cityData.data[0].lon,
-        latLonText: 'Location: ',
-        weatherResponse: {},
+        latLonText: 'Location: '
       }));
       console.log(cityData);
       // console.log(this.state); State won't update here
 
+    this.findMap()
     } catch (error) {
 
       //set state
       this.setState({
         error: error.response.data.error,
         showModal: true,
-        errorMsg: `You entered ${userCity}. ${error.message}. Try again`
-      }, () => console.log(this.state.error));
+        errorMsg: `${error.message}. Check the city spelling and try again.`
+      });
     }
+    // this.findMap();
+  }
+    // console.log(this.state.error);
 
-    console.log(this.state.error);
 
+    //Map the data
+    findMap = async () => {
     //Try getting a map using lat,lon values
     let mapUrl = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&center=${this.state.lat},${this.state.lon}&zoom=10&format=jpg`
-
     
     try {
-      let cityMap = await axios.get(mapUrl);
+      // let cityMap = await axios.get(mapUrl);
 
       //ISSUE WITH STATE RENDERING ON MAP
-      console.log(cityMap.request.responseURL);
+      //console.log(map.request.responseURL);
 
       this.setState({
-        map: cityMap.request.responseURL
-      }, () => console.log(this.findWeather()));
+        map: mapUrl
+      }, () => this.findWeather());
 
     } catch (error) {
 
@@ -120,11 +130,11 @@ class App extends React.Component {
       this.setState({
         error: error.response.data.error,
         showModal: true,
-        errorMsg: `${userCity} can not be found. ${error.message}. Try again.`
+        errorMsg: `${this.state.city} can not be found. ${error.message}. Try again.`
       });
     }
     // //get weather data for the city
-    this.findWeather();
+    // this.findWeather();
 
   }
 
@@ -140,18 +150,27 @@ class App extends React.Component {
       //Set retieved data in state
       this.setState({
         weatherResponse: weather.data
-      }, () => console.log(this.state.weatherResponse));
+      });
+
+      console.log(weather.data);
+    //Create Weather cards if weather for this location exists
+    // const map1 = weather.data.map(x =>
+    //   <Weather description={x.description}/>
+    //   );
+
+    //Store forecast in an array
+    // this.setState({
+    //   forecast: map1})
+
     } catch (error) {
 
       //Change Error 
       this.setState({
-        error: `${error.response.status}: ${error.response.statusText}. Can not get weather for this location.`
-        
+        errorMsg: `${error.response.status}: ${error.response.statusText}. Can not get weather for this location.`
       });
-
+  this.showModal()
       //       console.log(`${error.response.status}: ` ,error.response.statusText)
     }
-    
   }
 
 
@@ -159,16 +178,35 @@ class App extends React.Component {
   // closeAlert = (event) => {
   //   console.log(event.target.value)
   // }
+  closeError = () => this.setState({ errorMsg: "" });
 
+ 
   render() {
     //Render data for return
     return (
       <>
-        <Header />
-
-        <Weather city={this.state.city} display_name={this.state.display_name} locationData={this.state.locationData} findCity={this.findCity} map={this.state.map} latLonText={this.state.latLonText} />
-
-        <Modal show={this.state.showModal} onHide={this.hideModal} dialogClassName="modal-90w">
+     
+        <Form onSubmit={this.findCity} style={{ width: '10%'}}  id='form'>
+          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+            <Form.Label>Enter a city: </Form.Label>
+            <Form.Control type="text" placeholder="Orlando" />
+          </Form.Group>
+          <Button variant="primary" type="submit" id="submitButton" >
+            Explore!
+          </Button>
+        </Form>
+            <div id='wDiv'>
+ <Weather data={this.state.weatherResponse}/>
+   </div>  
+<div id='mainDiv'>
+  <div id='div2'>
+          {this.state.lat && (<Map mapURL={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&center=${this.state.lat},${this.state.lon}&zoom=10&format=jpg`} city={this.state.city}/>)}
+          </div>
+          <div id='div3'>
+          </div>
+     </div>
+   <Modal show={this.state.showModal} onHide={this.hideModal} dialogClassName="modal-90w">
+        <Modal.Dialog>
           <Modal.Header closeButton>
             <Modal.Title>Invalid Location</Modal.Title>
           </Modal.Header>
@@ -179,7 +217,10 @@ class App extends React.Component {
               Close
             </Button>
           </Modal.Footer>
+          </Modal.Dialog>
         </Modal>
+        
+ <Footer/>
 
       </>
     )
