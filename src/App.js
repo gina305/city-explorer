@@ -185,6 +185,7 @@ class App extends React.Component {
     //Render data for return
     return (
       <>
+      <Header/>
      
         <Form onSubmit={this.findCity} style={{ width: '10%'}}  id='form'>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
