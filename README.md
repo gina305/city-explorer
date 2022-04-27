@@ -21,7 +21,7 @@ The following diagram(s) depict how data will flow for this project:
 ![Lab07](./imgs/Lab07.png)
 
 ### Updated Web request-response cycle for lab 08
-![Lab08](./imgs/Lab08.jgg)
+![Lab08](./imgs/Lab08.jpg)
 
 ### Updated Web request-response cycle for lab 09
 ![Lab09](./imgs/Lab09.png)
