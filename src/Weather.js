@@ -1,7 +1,5 @@
 import React from "react"; //Import the React Component
 import './App.css' //Link CSS file
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 //Create an app compnent from react's original component. Similar to how classes work
 class Header extends React.Component {
@@ -24,7 +22,8 @@ class Header extends React.Component {
       </Card>
 
     );
-
+  
+    
     return (
       <>
       {map1}
