@@ -31,8 +31,8 @@ class App extends React.Component {
       errorMsg: '',
       map: '',
       showModal: false,
-      weatherResponse:[],
-      forecast:[]
+      weatherResponse: [],
+      forecast: []
     }
   }
   //asynchronous function for getting city data using the axios module
@@ -94,7 +94,7 @@ class App extends React.Component {
       console.log(cityData);
       // console.log(this.state); State won't update here
 
-    this.findMap()
+      this.findMap()
     } catch (error) {
 
       //set state
@@ -106,14 +106,14 @@ class App extends React.Component {
     }
     // this.findMap();
   }
-    // console.log(this.state.error);
+  // console.log(this.state.error);
 
 
-    //Map the data
-    findMap = async () => {
+  //Map the data
+  findMap = async () => {
     //Try getting a map using lat,lon values
     let mapUrl = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&center=${this.state.lat},${this.state.lon}&zoom=10&format=jpg`
-    
+
     try {
       // let cityMap = await axios.get(mapUrl);
 
@@ -153,14 +153,14 @@ class App extends React.Component {
       });
 
       console.log(weather.data);
-    //Create Weather cards if weather for this location exists
-    // const map1 = weather.data.map(x =>
-    //   <Weather description={x.description}/>
-    //   );
+      //Create Weather cards if weather for this location exists
+      // const map1 = weather.data.map(x =>
+      //   <Weather description={x.description}/>
+      //   );
 
-    //Store forecast in an array
-    // this.setState({
-    //   forecast: map1})
+      //Store forecast in an array
+      // this.setState({
+      //   forecast: map1})
 
     } catch (error) {
 
@@ -168,7 +168,7 @@ class App extends React.Component {
       this.setState({
         errorMsg: `${error.response.status}: ${error.response.statusText}. Can not get weather for this location.`
       });
-  this.showModal()
+      this.showModal()
       //       console.log(`${error.response.status}: ` ,error.response.statusText)
     }
   }
@@ -180,14 +180,14 @@ class App extends React.Component {
   // }
   closeError = () => this.setState({ errorMsg: "" });
 
- 
+
   render() {
     //Render data for return
     return (
       <>
-      <Header/>
-     
-        <Form onSubmit={this.findCity} style={{ width: '10%'}}  id='form'>
+        <Header />
+
+        <Form onSubmit={this.findCity} style={{ width: '10%' }} id='form'>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             <Form.Label>Enter a city: </Form.Label>
             <Form.Control type="text" placeholder="Orlando" />
@@ -196,32 +196,34 @@ class App extends React.Component {
             Explore!
           </Button>
         </Form>
-            <div id='wDiv'>
- <Weather data={this.state.weatherResponse}/>
-   </div>  
-<div id='mainDiv'>
-  <div id='div2'>
-          {this.state.lat && (<Map mapURL={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&center=${this.state.lat},${this.state.lon}&zoom=10&format=jpg`} city={this.state.city}/>)}
+        <div id='wDiv'>
+        <h3> {this.state.display_name}</h3>
+          <p> {this.state.lat},  {this.state.lon}</p>
+          <Weather data={this.state.weatherResponse} />
+        </div>
+        <div id='mainDiv'>
+          <div id='div2'>
+            {this.state.lat && (<Map mapURL={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&center=${this.state.lat},${this.state.lon}&zoom=10&format=jpg`} city={this.state.city} lat={this.state.lat}  lon={this.state.lon}/>)}
           </div>
           <div id='div3'>
           </div>
-     </div>
-   <Modal show={this.state.showModal} onHide={this.hideModal} dialogClassName="modal-90w">
-        <Modal.Dialog>
-          <Modal.Header closeButton>
-            <Modal.Title>Invalid Location</Modal.Title>
-          </Modal.Header>
-          <Modal.Body> {this.state.errorMsg}
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={this.hideModal}>
-              Close
-            </Button>
-          </Modal.Footer>
+        </div>
+        <Modal show={this.state.showModal} onHide={this.hideModal} dialogClassName="modal-90w">
+          <Modal.Dialog>
+            <Modal.Header closeButton>
+              <Modal.Title>Invalid Location</Modal.Title>
+            </Modal.Header>
+            <Modal.Body> {this.state.errorMsg}
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={this.hideModal}>
+                Close
+              </Button>
+            </Modal.Footer>
           </Modal.Dialog>
         </Modal>
-        
- <Footer/>
+
+        <Footer />
 
       </>
     )

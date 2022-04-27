@@ -122,5 +122,11 @@ footer{
 }
 
 #wDiv{
-  display: flex;
+  display: block;
+}
+p, h3 {
+  display: block;
+  padding: 2px;
+  text-align: center;
+
 }
