@@ -172,12 +172,6 @@ class App extends React.Component {
       //       console.log(`${error.response.status}: ` ,error.response.statusText)
     }
   }
-
-
-  // //Alert user if there is an error
-  // closeAlert = (event) => {
-  //   console.log(event.target.value)
-  // }
   closeError = () => this.setState({ errorMsg: "" });
 
 
