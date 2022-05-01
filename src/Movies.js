@@ -12,7 +12,7 @@ class Movie extends React.Component {
   //Return JSX - which allows us to use javascript to render html
   render() {
 
-    let arr = this.props.data;
+    
    // console.log(arr);
     //
     const map1 = this.props.data.map((x, index)=>
