@@ -130,3 +130,13 @@ p, h3 {
   text-align: center;
 
 }
+
+#movieCards{
+width: 50%;
+height: 50%;
+margin: auto;
+padding: 1px;
+}
+img{
+  width: max-content;
+}
