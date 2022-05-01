@@ -7,8 +7,9 @@ class Map extends React.Component {
   //Retrun JSX - which allows us to use javascript to render html
   render() {
     return(
+      <>
          <Image src={this.props.mapURL} alt={this.props.city} title={this.props.city} id='map'/>
-    
+    </>
     )
   }
 }

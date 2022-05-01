@@ -10,6 +10,7 @@ import Weather from './Weather'
 import Modal from 'react-bootstrap/Modal';
 import Map from './Map'
 import Form from 'react-bootstrap/Form';
+import Movie from './Movies';
 
 //Create an app component 
 class App extends React.Component {
@@ -32,7 +33,8 @@ class App extends React.Component {
       map: '',
       showModal: false,
       weatherResponse: [],
-      forecast: []
+      forecast: [],
+      movies:[]
     }
   }
   //asynchronous function for getting city data using the axios module
@@ -91,7 +93,7 @@ class App extends React.Component {
         lon: cityData.data[0].lon,
         latLonText: 'Location: '
       }));
-      console.log(cityData);
+     // console.log(cityData);
       // console.log(this.state); State won't update here
 
       this.findMap()
@@ -140,8 +142,13 @@ class App extends React.Component {
 
   //Request data from my custom weather server endpoint
   findWeather = async () => {
-    let weatherURL = `https://city-explorer-cf301-gina.herokuapp.com/weather?city=${this.state.city}`
 
+    //***Backend is pushed up and deployed on Heroku. Heroku is having issues serving my site data. Please run backend server locally.***
+   // let weatherURL = `https://city-explorer-cf301-gina.herokuapp.com/weather?lat=${this.state.lat}&lon=${this.state.lon}`
+
+   let weatherURL = `http://127.0.0.1:3001/weather?lat=${this.state.lat}&lon=${this.state.lon}`
+
+    //console.log(weatherURL);
 
     try {
       //Retrieve data from backend
@@ -152,15 +159,39 @@ class App extends React.Component {
         weatherResponse: weather.data
       });
 
-      console.log(weather.data);
-      //Create Weather cards if weather for this location exists
-      // const map1 = weather.data.map(x =>
-      //   <Weather description={x.description}/>
-      //   );
+     // console.log(weather.data);
 
-      //Store forecast in an array
-      // this.setState({
-      //   forecast: map1})
+    
+
+    } catch (error) {
+
+      //Change Error 
+      this.setState({
+        errorMsg: `${error.response.status}: ${error.response.statusText}. Can not get weather for this location.`
+      });
+      this.showModal()
+      //       console.log(`${error.response.status}: ` ,error.response.statusText)
+    }
+    this.findMovies();
+  }
+
+  findMovies = async () => {
+
+   let movieURL = `http://127.0.0.1:3001/movies?city=${this.state.city}`
+
+
+   // console.log(movieURL);
+
+    try {
+      //Retrieve data from backend
+      let movies = await axios.get(movieURL);
+     // console.log(movies);
+
+      //Set retieved data in state
+      this.setState({
+        movies: movies.data
+      });
+    //console.log(this.state.movies)
 
     } catch (error) {
 
@@ -173,7 +204,6 @@ class App extends React.Component {
     }
   }
   closeError = () => this.setState({ errorMsg: "" });
-
 
   render() {
     //Render data for return
@@ -200,6 +230,7 @@ class App extends React.Component {
             {this.state.lat && (<Map mapURL={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&center=${this.state.lat},${this.state.lon}&zoom=10&format=jpg`} city={this.state.city} lat={this.state.lat}  lon={this.state.lon}/>)}
           </div>
           <div id='div3'>
+          <Movie data={this.state.movies}/>
           </div>
         </div>
         <Modal show={this.state.showModal} onHide={this.hideModal} dialogClassName="modal-90w">
