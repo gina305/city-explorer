@@ -13,6 +13,8 @@ What you'll need:
 * Node, NPM, NVM, React & Axios installed
 * Web Browser (recommend Google Chrome)
 
+The backend API server for this project is located here: https://github.com/gina305/city-explorer-api
+
 ## Architecture
 
 The following diagram(s) depict how data will flow for this project:
